@@ -4,6 +4,7 @@ import { getTransactions } from "../lib/api";
 import { formatAmount } from "../lib/format";
 import type { TransactionStatus } from "../types/payment";
 import { useState } from "react";
+import { TableSkeleton } from "./TableSkeleton";
 
 const statusStyles: Record<TransactionStatus, string> = {
   success: "bg-green-500/20 text-green-400",
@@ -23,7 +24,7 @@ export default function TransactionsTable() {
     queryFn: getTransactions,
   });
 
-  if (isPending) return <p>Loading...</p>;
+  if (isPending) return<TableSkeleton />;
   if (isError) return <p>Something went wrong</p>;
 
   const filtered = data.filter(
@@ -37,7 +38,7 @@ export default function TransactionsTable() {
   const totalPages = Math.ceil(filtered.length / PAGE_SIZE);
 
   return (
-    <div className="max-w-3xl mx-auto p-6">
+  <div className="max-w-3xl mx-auto p-0 sm:p-6">ى
       <h1 className="text-2xl font-bold mb-4">Transactions</h1>
       <input
         value={search}
