@@ -1,4 +1,5 @@
 "use client";
+import { CheckCircle2, Lock, XCircle } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { CardSchema, type CardFormData } from "../lib/cardSchema";
@@ -26,9 +27,9 @@ export default function CardForm({ amount }: { amount: number }) {
   if (mutation.isSuccess) {
     return (
       <div className="fade-up flex flex-col items-center gap-3 py-6 text-center">
-        <div className="flex h-14 w-14 items-center justify-center rounded-full bg-green-500/20 text-3xl text-green-400">
-          ✓
-        </div>
+        <div className="flex h-14 w-14 items-center justify-center rounded-full bg-green-500/20 text-green-400">
+  <CheckCircle2 className="h-8 w-8" />
+</div>
         <p className="text-xl font-semibold text-green-400">
           Payment successful!
         </p>
@@ -40,10 +41,11 @@ export default function CardForm({ amount }: { amount: number }) {
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-3">
       {mutation.isError && (
-        <p className="rounded-lg bg-red-500/10 border border-red-500/30 px-4 py-3 text-sm text-red-400">
-          Payment failed. Please try again.
-        </p>
-      )}
+  <div className="flex items-center gap-2 rounded-lg bg-red-500/10 p-3 text-sm text-red-400">
+    <XCircle className="h-5 w-5 shrink-0" />
+    <span>Payment failed. Please try another card.</span>
+  </div>
+)}
       <input
         {...register("cardNumber")}
         placeholder="Card number"
@@ -74,7 +76,6 @@ export default function CardForm({ amount }: { amount: number }) {
           )}
         </div>
       </div>
-
       <button
         type="submit"
         disabled={mutation.isPending}
@@ -86,7 +87,10 @@ export default function CardForm({ amount }: { amount: number }) {
             Processing...
           </span>
         ) : (
-          "Pay"
+          <span className="flex items-center justify-center gap-2">
+            <Lock className="h-4 w-4" />
+            Pay
+          </span>
         )}
       </button>
     </form>
