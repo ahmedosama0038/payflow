@@ -86,7 +86,7 @@ export default function TransactionsTable() {
           <tbody>
             {pageItems.map((t) => (
               <tr key={t.id} className="border-b border-gray-800">
-                <td className="px-4 py-3">{t.id}</td>
+             <td className="px-4 py-3 font-mono text-sm">#{t.id.slice(-6)}</td>
                 <td className="px-4 py-3">{formatAmount(t.amount)}</td>
                 <td className="px-4 py-3">{t.method}</td>
                 <td className="px-4 py-3">
