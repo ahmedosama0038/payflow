@@ -1,6 +1,5 @@
-import CheckoutScreen from "./components/CheckoutScreen";
-import { mockOrder } from "./lib/mockOrders";
+import { redirect } from "next/navigation";
 
 export default function Home() {
-  return <CheckoutScreen order={mockOrder} />;
+  redirect("/create");
 }
