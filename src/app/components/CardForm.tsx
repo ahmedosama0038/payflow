@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { CardSchema, type CardFormData } from "../lib/cardSchema";
 import { useMutation } from "@tanstack/react-query";
-export default function CardForm() {
+export default function CardForm({ amount }: { amount: number }) {
   const {
     register,
     handleSubmit,
@@ -11,7 +11,7 @@ export default function CardForm() {
   } = useForm<CardFormData>({ resolver: zodResolver(CardSchema) });
 
   const mutation = useMutation({
-    mutationFn: async (data: CardFormData) => {
+  mutationFn: async (data: CardFormData & { amount: number }) => {
       const res = await fetch("/api/payments", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -22,7 +22,7 @@ export default function CardForm() {
     },
   });
 
-  const onSubmit = (data: CardFormData) => mutation.mutate(data);
+ const onSubmit = (data: CardFormData) => mutation.mutate({ ...data, amount });
   if (mutation.isSuccess) {
     return (
       <div className="flex flex-col items-center gap-3 py-6 text-center">

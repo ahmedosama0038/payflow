@@ -38,7 +38,7 @@ export default function TransactionsTable() {
   const totalPages = Math.ceil(filtered.length / PAGE_SIZE);
 
   return (
-  <div className="max-w-3xl mx-auto p-0 sm:p-6">ى
+  <div className="max-w-3xl mx-auto p-0 sm:p-6">
       <h1 className="text-2xl font-bold mb-4">Transactions</h1>
       <input
         value={search}

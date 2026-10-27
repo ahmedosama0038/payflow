@@ -1,14 +1,14 @@
 import { NextResponse } from "next/server";
 import { addTransaction } from "../../lib/mockTransactions";
 export async function POST(request: Request) {
-  const { cardNumber } = await request.json();
+ const { cardNumber, amount } = await request.json();
   await new Promise((resolve) => setTimeout(resolve, 2000));
 
   const declined = cardNumber === "4000000000000002";
 
   addTransaction({
     id: `txn_${Date.now()}`,
-    amount: 35000,
+    amount: amount,
     currency: "EGP",
     status: declined ? "failed" : "success",
     method: "card",

@@ -17,7 +17,7 @@ export default function CheckoutScreen({ order }: { order: CheckoutOrder }) {
   <div className="w-full max-w-md bg-neutral-900 rounded-2xl p-6 shadow-lg">
     <p className="text-gray-400">{order.merchantName} - {order.orderId}</p>
     <h1 className="text-3xl font-bold my-4">{formatAmount(order.amount)}</h1>
-    <CardForm />
+    <CardForm  amount={order.amount} />
     <Link href="/dashboard" className="mt-4 block text-center text-sm text-gray-400 hover:text-white">
   View transactions →
 </Link>
