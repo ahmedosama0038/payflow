@@ -14,7 +14,7 @@ export default function CheckoutScreen({ order }: { order: CheckoutOrder }) {
 
   return (
 <div className="min-h-screen flex items-center justify-center p-4">
-  <div className="w-full max-w-md bg-neutral-900 rounded-2xl p-6 shadow-lg">
+ <div className="fade-up w-full max-w-md rounded-2xl bg-neutral-900 p-4 shadow-lg sm:p-6">
     <p className="text-gray-400">{order.merchantName} - {order.orderId}</p>
     <h1 className="text-3xl font-bold my-4">{formatAmount(order.amount)}</h1>
     <CardForm  amount={order.amount} />
