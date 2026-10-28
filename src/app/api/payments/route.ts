@@ -1,9 +1,13 @@
 import { NextResponse } from "next/server";
 import { addTransaction } from "../../lib/mockTransactions";
+import { PaymentSchema } from "../../lib/cardSchema";
 export async function POST(request: Request) {
  const { cardNumber, amount } = await request.json();
-  await new Promise((resolve) => setTimeout(resolve, 2000));
-
+const result =  PaymentSchema.safeParse({amount});
+if(!result.success){
+  return NextResponse.json({ error: "Invalid amount" }, { status: 400 });
+}
+await new Promise((resolve) => setTimeout(resolve, 2000));
   const declined = cardNumber === "4000000000000002";
 
   addTransaction({
